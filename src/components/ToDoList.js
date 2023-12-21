@@ -1,3 +1,4 @@
+import ManageDOM from "./ManageDOM";
 
 class ToDoList {
     constructor(title, description, dueDate, priority, notes) {
@@ -48,6 +49,9 @@ class ToDoList {
         return this.notes;
     }
 
+    createNewList() {
+        
+    }
     
     
 }
