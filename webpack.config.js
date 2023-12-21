@@ -14,10 +14,35 @@ module.exports = {
                 test: /\.css$/,
                 use: ['style-loader', 'css-loader'],
             },
+            {
+                test: /\.(png|jpe?g|gif)$/i,
+                use: [
+                    {
+                        loader: 'file-loader',
+                        options: {
+                            name: '[name].[ext]',
+                            outputPath: 'assets/images/',
+                        },
+                    },
+                ],
+            },
+            {
+                test: /\.(woff|woff2|eot|ttf|otf)$/i,
+                use: [
+                    {
+                        loader: 'file-loader',
+                        options: {
+                            name: '[name].[ext]',
+                            outputPath: 'assets/fonts/',
+                        },
+                    },
+                ],
+            }
         ],
     },
     plugins: [
         new HtmlWebpackPlugin({
+            favicon: './src/assets/icons/do_it_right_meow_favicon.ico',
             template: './src/index.html'
         })
     ],
