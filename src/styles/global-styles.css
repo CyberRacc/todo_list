@@ -1,3 +1,14 @@
+/*
+@font-face {
+    font-family: 'Catamaran';
+    src: url('../assets/fonts/Catamaran-VariableFont_wght.ttf') format('truetype');
+    font-weight: 400; // Variable font weight range
+    font-style: normal;
+}
+*/
+
+@import url('https://fonts.googleapis.com/css2?family=Catamaran:wght@500&family=Manrope:wght@200&display=swap');
+
 /* Light Theme */
 :root {
     --primary-color: #5dade2; /* A nice shade of blue */
@@ -17,10 +28,25 @@
 }
 
 body {
+    font-family: 'Catamaran', sans-serif;
     background-color: var(--background-color);
     color: var(--text-color);
     border-color: var(--border-color);
     /* ... other styles ... */
+}
+
+#content {
+    display: grid;
+    grid-template-rows: auto 1fr;
+    grid-template-columns: 1fr 6fr;
+    grid-gap: 8px;
+    padding: 8px;
+}
+
+#main-page {
+    background-color: blue;
+    width: 100%;
+    height: 100%;
 }
 
 a {
@@ -30,5 +56,44 @@ a {
 
 button {
     background-color: var(--secondary-color);
-    /* ... other styles ... */
+    padding: 8px;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+}
+
+dialog {
+    background-color: var(--background-color);
+    color: var(--text-color);
+    border-color: var(--border-color);
+    border-radius: 12px;
+    display: grid;
+    grid-template-rows: 1fr auto;
+}
+
+dialog h1 {
+    margin: 0;
+    padding: 16px;
+    border-bottom: 1px solid var(--border-color);
+    text-align: center;
+}
+
+dialog button {
+    background-color: var(--secondary-color);
+    padding: 8px;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    width: 100%;
+}
+
+form {
+    display: grid;
+    grid-template-rows: 1fr auto;
+    grid-gap: 8px;
+    padding: 8px;
+}
+
+input {
+    padding: 8px;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
 }
