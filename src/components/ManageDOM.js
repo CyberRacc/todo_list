@@ -132,7 +132,6 @@ class ManageDOM {
         // Create list page header
         const listPageHeader = document.createElement('div');
         listPageHeader.id = 'list-page-header';
-        listPageHeader.textContent = listTitle;
         listPage.appendChild(listPageHeader);
 
         // Create list page header title
@@ -150,48 +149,89 @@ class ManageDOM {
         const listPageHeaderButtonsList = document.createElement('ul');
         listPageHeaderButtonsList.id = 'list-page-header-buttons-list';
         listPageHeaderButtons.appendChild(listPageHeaderButtonsList);
+
+        const mainPage = document.getElementById('main-page');
+        mainPage.appendChild(listPage);
     }
 
     createSettingsPage() {
+        // Check if the settings page already exists
+        let settingsPage = document.getElementById('settings-page');
+        if (settingsPage) {
+            return; // Exit the function to avoid creating a duplicate settings page
+        }
+    
+        // Since the settings page doesn't exist, create it as usual
+        settingsPage = document.createElement('div');
+        settingsPage.id = 'settings-page';
+    
+        const settingsPageHeading = document.createElement('h1');
+        settingsPageHeading.textContent = 'Settings';
+        settingsPageHeading.id = 'settings-page-heading';
+    
+        const settingsPageContent = document.createElement('div');
+        settingsPageContent.id = 'settings-page-content';
+        settingsPageContent.appendChild(settingsPageHeading);
+    
+        // Append the heading to the settingsPageContent first
+        settingsPageContent.appendChild(settingsPageHeading);
+    
         const settingsContainer = document.createElement('div');
         settingsContainer.id = 'settings-container';
-
+    
         for (const key in this.settings) {
             const settingItem = document.createElement('div');
             settingItem.classList.add('setting-item');
-
+    
             const settingLabel = document.createElement('label');
             settingLabel.textContent = key;
             settingItem.appendChild(settingLabel);
-
+    
             const settingSelect = document.createElement('select');
             settingSelect.id = key;
-
+    
             this.settings[key].forEach(value => {
                 const option = document.createElement('option');
                 option.value = value;
                 option.textContent = value;
                 settingSelect.appendChild(option);
             });
-
+    
             settingItem.appendChild(settingSelect);
             settingsContainer.appendChild(settingItem);
         }
-
-        document.body.appendChild(settingsContainer);
-
-        const settingsPage = document.createElement('div');
-        settingsPage.id = 'settings-page';
-        this.mainContent.appendChild(settingsPage);
-
-        const settingsPageHeading = document.createElement('h1');
-        settingsPageHeading.id = 'settings-page-heading';
-        settingsPageHeading.textContent = 'Settings';
-        settingsPage.appendChild(settingsPageHeading);
-
-        const settingsPageContent = document.createElement('div');
-        settingsPageContent.id = 'settings-page-content';
+    
+        // Now append settingsContainer to settingsPageContent instead of document.body
+        settingsPageContent.appendChild(settingsContainer);
+    
+        const btnCloseSettingsPage = document.createElement('button');
+        btnCloseSettingsPage.textContent = 'Close';
+        btnCloseSettingsPage.id = 'btn-close-settings-page';
+        settingsPageContent.appendChild(btnCloseSettingsPage);
+    
+        // Event listeners remain unchanged
+        btnCloseSettingsPage.addEventListener('click', this.closeSettingsPage);
+        document.addEventListener('keydown', e => {
+            if (e.key === 'Escape') {
+                this.closeSettingsPage();
+            }
+        });
+    
+        // Append settingsPageContent to settingsPage at the end
         settingsPage.appendChild(settingsPageContent);
+    
+        // Finally, append settingsPage to a parent container, 
+        // assuming 'main-page' is the intended parent element.
+        const mainPage = document.getElementById('main-page');
+        mainPage.appendChild(settingsPage);
+    }
+
+    closeSettingsPage() {
+        const settingsPage = document.getElementById('settings-page');
+        if (settingsPage) {
+            settingsPage.remove(); // This removes the settings page, which should also remove all its child elements
+            console.log("Settings page closed");
+        }
     }
 
     sidebarEventListeners() {
@@ -273,8 +313,6 @@ class ManageDOM {
         });
     }
 
-
-        
 }
 
 export default ManageDOM;
