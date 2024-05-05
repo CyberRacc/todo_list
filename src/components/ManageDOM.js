@@ -114,7 +114,7 @@ class ManageDOM {
         // Create sidebar footer text
         const sidebarFooterText = document.createElement('p');
         sidebarFooterText.id = 'sidebar-footer-text';
-        sidebarFooterText.textContent = '© 2020 Do It Right Meow';
+        sidebarFooterText.textContent = '© 2024 Do It Right Meow';
         sidebarFooter.appendChild(sidebarFooterText);
 
         // Add sidebar to DOM
